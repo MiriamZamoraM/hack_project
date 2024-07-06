@@ -1,0 +1,8 @@
+SECRET_KEY=django_secret_key
+DEBUG=False
+
+DB_NAME=name
+DB_USER=user
+DB_PASSWORD=password
+DB_HOST=host
+DB_PORT=port (5432)
