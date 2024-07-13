@@ -32,11 +32,16 @@ INSTALLED_APPS = [
 
 ]
 
-LOCAL_APPS = [
-    #LOCAL_APPS
+THIRD_APPS = [
+    'oauth2_provider',
 ]
 
-INSTALLED_APPS = INSTALLED_APPS + LOCAL_APPS
+LOCAL_APPS = [
+    #LOCAL_APPS
+    'users',
+]
+
+INSTALLED_APPS = INSTALLED_APPS + THIRD_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -138,3 +143,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
