@@ -38,7 +38,7 @@ THIRD_APPS = [
 ]
 
 LOCAL_APPS = [
-    #LOCAL_APPS
+    # LOCAL_APPS
     'users',
 ]
 
@@ -82,7 +82,7 @@ DB_NAME = config("DB_NAME", default="")
 DB_USER = config("DB_USER", default="")
 DB_PASSWORD = config("DB_PASSWORD", default="")
 DB_HOST = config("DB_HOST", default="127.0.0.1")
-DB_PORT =config("DB_PORT", cast=int, default=5432)
+DB_PORT = config("DB_PORT", cast=int, default=5432)
 
 if DB_NAME != "":
     DATABASES = {
@@ -97,11 +97,11 @@ if DB_NAME != "":
         }
 else:
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+            }
         }
-    }
 
 
 # Password validation
