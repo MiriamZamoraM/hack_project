@@ -1,6 +1,8 @@
-import os, sys
+import sys
 from pathlib import Path
-from decouple import config, Csv
+
+from decouple import config
+from decouple import Csv  # noqa: F401
 
 ENV = config("ENV", default="dev")
 
@@ -16,7 +18,19 @@ SECRET_KEY = config("SECRET_KEY", default="django_project_secret_key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv(), default="*")
+
+CORS_ALLOW_ALL_ORIGINS = config(
+    "CORS_ALLOW_ALL_ORIGINS",
+    default=False,
+    cast=bool,
+)
+
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", cast=Csv(), default="")
+
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=Csv(), default="")
+
+CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", default=False, cast=bool)
 
 
 # Application definition
@@ -37,7 +51,7 @@ THIRD_APPS = [
 ]
 
 LOCAL_APPS = [
-    #LOCAL_APPS
+    # LOCAL_APPS
     'users',
 ]
 
@@ -81,7 +95,7 @@ DB_NAME = config("DB_NAME", default="")
 DB_USER = config("DB_USER", default="")
 DB_PASSWORD = config("DB_PASSWORD", default="")
 DB_HOST = config("DB_HOST", default="127.0.0.1")
-DB_PORT =config("DB_PORT", cast=int, default=5432)
+DB_PORT = config("DB_PORT", cast=int, default=5432)
 
 if DB_NAME != "":
     DATABASES = {
@@ -92,14 +106,14 @@ if DB_NAME != "":
             'PASSWORD': DB_PASSWORD,
             'HOST': DB_HOST,
             'PORT': DB_PORT,
-            }
-        }
+        },
+    }
 else:
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        },
     }
 
 
@@ -108,16 +122,25 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.NumericPasswordValidator'
+        ),
     },
 ]
 
