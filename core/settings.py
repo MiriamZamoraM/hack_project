@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+
 from decouple import config
 from decouple import Csv  # noqa: F401
 
@@ -17,7 +18,19 @@ SECRET_KEY = config("SECRET_KEY", default="django_project_secret_key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv(), default="*")
+
+CORS_ALLOW_ALL_ORIGINS = config(
+    "CORS_ALLOW_ALL_ORIGINS",
+    default=False,
+    cast=bool,
+)
+
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", cast=Csv(), default="")
+
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=Csv(), default="")
+
+CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", default=False, cast=bool)
 
 
 # Application definition
@@ -93,15 +106,15 @@ if DB_NAME != "":
             'PASSWORD': DB_PASSWORD,
             'HOST': DB_HOST,
             'PORT': DB_PORT,
-            }
-        }
+        },
+    }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
-            }
-        }
+        },
+    }
 
 
 # Password validation
