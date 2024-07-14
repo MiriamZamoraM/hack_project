@@ -1,6 +1,6 @@
-import os, sys
+import sys
 from pathlib import Path
-from decouple import config, Csv
+from decouple import config
 
 ENV = config("ENV", default="dev")
 
