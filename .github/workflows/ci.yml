@@ -44,4 +44,4 @@ jobs:
         env:
             PYTHONPATH: ./apps
         run: |
-            python manage.py test
+            python manage.py test apps
