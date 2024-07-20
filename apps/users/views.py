@@ -10,7 +10,6 @@ from .serializers import UserLoginSerializar
 from .serializers import UserSerializer
 
 
-
 class RegistryView(APIView):
     authentication_classes = ()
     permission_classes = (AllowAny,)
