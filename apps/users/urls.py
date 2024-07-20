@@ -1,7 +1,8 @@
 from django.urls import path
-from users.views import LoginView
-from users.views import RefreshTokenView
-from users.views import RegistryView
+
+from .views import LoginView
+from .views import RefreshTokenView
+from .views import RegistryView
 
 urlpatterns = [
     path(route="registry/", view=RegistryView.as_view(), name="registry"),
