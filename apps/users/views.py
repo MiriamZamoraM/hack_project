@@ -6,8 +6,8 @@ from rest_framework.views import APIView
 from .models import User
 from .serializers import UserLoginSerializar
 from .serializers import UserSerializer
-from ..lib.auth import get_token
-from ..lib.exceptions import TokenException
+from lib.auth import get_token
+from lib.exceptions import TokenException
 
 
 class RegistryView(APIView):
