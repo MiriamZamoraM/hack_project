@@ -176,3 +176,11 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
+
+AUTH_USER_MODEL = "users.User"
+
+CONFIG = {
+    "OAUTH_CLIENT_ID": config("OAUTH_CLIENT_ID", default=""),
+    "OAUTH_CLIENT_SECRET": config("OAUTH_CLIENT_SECRET", default=""),
+    "SELF_HOST": config("SELF_HOST", default=""),
+}
