@@ -1,6 +1,6 @@
 import requests
-from arya.settings import CONFIG
 
+from core.settings import CONFIG
 from lib.exceptions import TokenException
 
 
