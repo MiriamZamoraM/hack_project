@@ -38,8 +38,8 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField("Correo electrónico", unique=True, blank=False)
-    name = models.CharField(blank=False, verbose_name="Nombre")
-    last_name = models.CharField(blank=False, verbose_name="Apellido")
+    name = models.CharField(blank=False, max_length=150, verbose_name="Nombre")
+    last_name = models.CharField(blank=False, max_length=150, verbose_name="Apellido")
     is_partner = models.BooleanField(default=False, verbose_name="Es colaborador")
     is_active = models.BooleanField(default=True, verbose_name="Está activo")
     is_staff = models.BooleanField(default=False, verbose_name="Es staff")
