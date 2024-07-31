@@ -14,23 +14,24 @@ class RegistryView(APIView):
     authentication_classes = ()
     permission_classes = (AllowAny,)
 
-    """
-        - Registry
-            Input should be in the format:
-            {"name":"John","email": "johnm@email.com", "password": "1234abcd"}
-            """
-
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            token = get_token(request.data["email"], request.data["password"])
-            data = {
-                "id": serializer.data["id"],
-                "email": serializer.data["email"],
-                "auth": token.json(),
-            }
-            return Response(status=status.HTTP_201_CREATED, data=data)
+            try:
+                token_response = get_token(request.data["email"], request.data["password"])
+                token = token_response.json()  # Asegúrate de manejar el JSON correctamente
+                data = {
+                    "id": serializer.data["id"],
+                    "email": serializer.data["email"],
+                    "auth": token,
+                }
+                return Response(status=status.HTTP_201_CREATED, data=data)
+            except TokenException:
+                return Response(
+                    {"detail": "No se pudo obtener el token."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
 
