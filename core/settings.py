@@ -53,6 +53,7 @@ THIRD_APPS = [
 LOCAL_APPS = [
     # LOCAL_APPS
     'users',
+    'pathcore',
 ]
 
 INSTALLED_APPS = INSTALLED_APPS + THIRD_APPS + LOCAL_APPS
