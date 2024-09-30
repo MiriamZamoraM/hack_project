@@ -14,11 +14,25 @@ class Corepath(models.Model):
         verbose_name = 'Core'
 
 
-class CoreUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class SubCorePath(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Sub Tronco')
+    description = models.TextField(verbose_name='Descripción')
     core = models.ForeignKey(Corepath, on_delete=models.CASCADE)
+    status_delete = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = 'SubCorePath'
+        verbose_name = 'SubPaths'
+
+
+class CoreUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    sub_core = models.ForeignKey(SubCorePath, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
     url_repo = models.URLField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    status_delete = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'CoreUser'
