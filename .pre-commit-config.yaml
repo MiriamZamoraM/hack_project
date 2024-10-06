@@ -22,11 +22,11 @@ repos:
         additional_dependencies:
           - importlib_metadata>=4.10.0
 
-  - repo: https://github.com/asottile/add-trailing-comma
-    rev: v3.1.0
-    hooks:
-      - id: add-trailing-comma
-        args: [--py36-plus]
+#  - repo: https://github.com/asottile/add-trailing-comma
+#    rev: v3.1.0
+#    hooks:
+#      - id: add-trailing-comma
+#        args: [--py36-plus]
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.16.0
